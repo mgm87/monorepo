@@ -123,6 +123,52 @@
           }
         }
       }
+    },
+    "rxrs": {
+      "root": "libs/rxrs",
+      "sourceRoot": "libs/rxrs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/rxrs/tsconfig.lib.json",
+              "libs/rxrs/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/rxrs/**/*"]
+          }
+        },
+        "build": {
+          "builder": "@nrwl/web:package",
+          "options": {
+            "outputPath": "dist/libs/rxrs",
+            "tsConfig": "libs/rxrs/tsconfig.lib.json",
+            "project": "libs/rxrs/package.json",
+            "entryFile": "libs/rxrs/src/index.ts",
+            "external": ["react", "react-dom"],
+            "babelConfig": "@nrwl/react/plugins/bundle-babel",
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/rxrs/jest.config.js",
+            "tsConfig": "libs/rxrs/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

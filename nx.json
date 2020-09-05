@@ -28,6 +28,9 @@
     "rxrs-demo-e2e": {
       "tags": [],
       "implicitDependencies": ["rxrs-demo"]
+    },
+    "rxrs": {
+      "tags": []
     }
   }
 }
