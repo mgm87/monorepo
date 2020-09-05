@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "projects": {
+    "rxrs-demo": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/rxrs-demo",
+      "sourceRoot": "apps/rxrs-demo/src",
+      "prefix": "monorepo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/rxrs-demo",
+            "index": "apps/rxrs-demo/src/index.html",
+            "main": "apps/rxrs-demo/src/main.ts",
+            "polyfills": "apps/rxrs-demo/src/polyfills.ts",
+            "tsConfig": "apps/rxrs-demo/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/rxrs-demo/src/favicon.ico",
+              "apps/rxrs-demo/src/assets"
+            ],
+            "styles": ["apps/rxrs-demo/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/rxrs-demo/src/environments/environment.ts",
+                  "with": "apps/rxrs-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "rxrs-demo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "rxrs-demo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "rxrs-demo:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/rxrs-demo/tsconfig.app.json",
+              "apps/rxrs-demo/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/rxrs-demo/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/rxrs-demo/jest.config.js",
+            "tsConfig": "apps/rxrs-demo/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/rxrs-demo/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "rxrs-demo-e2e": {
+      "root": "apps/rxrs-demo-e2e",
+      "sourceRoot": "apps/rxrs-demo-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/rxrs-demo-e2e/cypress.json",
+            "tsConfig": "apps/rxrs-demo-e2e/tsconfig.e2e.json",
+            "devServerTarget": "rxrs-demo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "rxrs-demo:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/rxrs-demo-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/rxrs-demo-e2e/**/*"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "rxrs-demo"
+}
