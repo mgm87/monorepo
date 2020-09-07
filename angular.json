@@ -25,7 +25,10 @@
               "apps/rxrs-demo/src/favicon.ico",
               "apps/rxrs-demo/src/assets"
             ],
-            "styles": ["apps/rxrs-demo/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/rxrs-demo/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -83,7 +86,10 @@
               "apps/rxrs-demo/tsconfig.app.json",
               "apps/rxrs-demo/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/rxrs-demo/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/rxrs-demo/**/*"
+            ]
           }
         },
         "test": {
@@ -118,8 +124,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/rxrs-demo-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/rxrs-demo-e2e/**/*"]
+            "tsConfig": [
+              "apps/rxrs-demo-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/rxrs-demo-e2e/**/*"
+            ]
           }
         }
       }
@@ -138,7 +149,10 @@
               "libs/rxrs/tsconfig.lib.json",
               "libs/rxrs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/rxrs/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/rxrs/**/*"
+            ]
           }
         },
         "build": {
@@ -148,7 +162,10 @@
             "tsConfig": "libs/rxrs/tsconfig.lib.json",
             "project": "libs/rxrs/package.json",
             "entryFile": "libs/rxrs/src/index.ts",
-            "external": ["react", "react-dom"],
+            "external": [
+              "react",
+              "react-dom"
+            ],
             "babelConfig": "@nrwl/react/plugins/bundle-babel",
             "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
             "assets": [
@@ -167,6 +184,53 @@
             "tsConfig": "libs/rxrs/tsconfig.spec.json",
             "passWithNoTests": true
           }
+        }
+      }
+    },
+    "rxrs-ng": {
+      "projectType": "library",
+      "root": "libs/rxrs-ng",
+      "sourceRoot": "libs/rxrs-ng/src",
+      "prefix": "monorepo",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/rxrs-ng/tsconfig.lib.json",
+            "project": "libs/rxrs-ng/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/rxrs-ng/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/rxrs-ng/tsconfig.lib.json",
+              "libs/rxrs-ng/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/rxrs-ng/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/rxrs-ng/jest.config.js",
+            "tsConfig": "libs/rxrs-ng/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/rxrs-ng/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
         }
       }
     }
@@ -214,7 +278,8 @@
       "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "strict": true
     }
   },
   "defaultProject": "rxrs-demo"

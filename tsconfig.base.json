@@ -17,7 +17,8 @@
     "baseUrl": ".",
     "strict": true,
     "paths": {
-      "rxrs": ["libs/rxrs/src/index.ts"]
+      "rxrs": ["libs/rxrs/src/index.ts"],
+      "rxrs-ng": ["libs/rxrs-ng/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

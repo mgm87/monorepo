@@ -43,7 +43,7 @@ const screenSizes = {
 /**
  * The initial (all false) screen sizes
  */
-const initialScreenSizes: FullScreenWidths = {
+export const initialScreenSizes: FullScreenWidths = {
   [ScreenWidthEnum.xSmall]: false,
   [ScreenWidthEnum.small]: false,
   [ScreenWidthEnum.medium]: false,
@@ -79,9 +79,15 @@ export class ScreenSizeService {
 
     this.sizes$ = combineLatest([
       this.rxrs.observe(this.buildWidthQuery(0, screenSizes.xSmall - 1)),
-      this.rxrs.observe(this.buildWidthQuery(screenSizes.xSmall, screenSizes.small - 1)),
-      this.rxrs.observe(this.buildWidthQuery(screenSizes.small, screenSizes.medium - 1)),
-      this.rxrs.observe(this.buildWidthQuery(screenSizes.medium, screenSizes.large - 1)),
+      this.rxrs.observe(
+        this.buildWidthQuery(screenSizes.xSmall, screenSizes.small - 1)
+      ),
+      this.rxrs.observe(
+        this.buildWidthQuery(screenSizes.small, screenSizes.medium - 1)
+      ),
+      this.rxrs.observe(
+        this.buildWidthQuery(screenSizes.medium, screenSizes.large - 1)
+      ),
       this.rxrs.observe(this.buildWidthQuery(screenSizes.large)),
     ]).pipe(
       map(

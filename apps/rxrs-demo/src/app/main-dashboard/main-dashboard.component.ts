@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-  WindowSizeService,
-  FullScreenWidthEnum,
-} from '../services/window-size.service';
-import { Observable } from 'rxjs';
+
+import { ScreenSizeService, ScreenWidthEnum } from 'rxrs-ng';
+
 import { AppStateService } from '../services/app-state.service';
 
 @Component({
@@ -19,16 +17,16 @@ export class MainDashboardComponent implements OnInit {
   filterPanelOpen$: Observable<boolean>;
 
   constructor(
-    private windowSizeService: WindowSizeService,
+    private screenSizeService: ScreenSizeService,
     private state: AppStateService
   ) {
     this.filterPanelOpen$ = this.state.filterPanelOpen$;
-    this.viewState = combineLatest(
-      this.windowSizeService.sizes$,
-      this.windowSizeService.isMobileState,
+    this.viewState = combineLatest([
+      this.screenSizeService.sizes$,
+      this.screenSizeService.isMobileState,
       this.state.sidenavOpen$,
-      this.state.filterPanelOpen$
-    ).pipe(
+      this.state.filterPanelOpen$,
+    ]).pipe(
       map(([sizes, isMobile, sidenavOpen, filtersOpen]) => {
         let viewToReturn: MainDashboardViewState;
         if (sizes.xSmall || (sizes.small && sidenavOpen)) {
@@ -39,7 +37,7 @@ export class MainDashboardComponent implements OnInit {
               { title: 'Card 3', cols: 2, rows: 1 },
               { title: 'Card 4', cols: 2, rows: 1 },
             ],
-            filterClass: FullScreenWidthEnum.xSmall,
+            filterClass: ScreenWidthEnum.xSmall,
             isMobile,
           };
         } else if (sizes.small && !sidenavOpen && filtersOpen) {
@@ -50,7 +48,7 @@ export class MainDashboardComponent implements OnInit {
               { title: 'Card 3', cols: 2, rows: 1 },
               { title: 'Card 4', cols: 2, rows: 1 },
             ],
-            filterClass: FullScreenWidthEnum.medium,
+            filterClass: ScreenWidthEnum.medium,
             isMobile,
           };
         } else if (sizes.medium && sidenavOpen && filtersOpen) {
@@ -61,7 +59,7 @@ export class MainDashboardComponent implements OnInit {
               { title: 'Card 3', cols: 2, rows: 1 },
               { title: 'Card 4', cols: 2, rows: 1 },
             ],
-            filterClass: FullScreenWidthEnum.medium,
+            filterClass: ScreenWidthEnum.medium,
             isMobile,
           };
         } else {
@@ -72,7 +70,7 @@ export class MainDashboardComponent implements OnInit {
               { title: 'Card 3', cols: 1, rows: 2 },
               { title: 'Card 4', cols: 1, rows: 1 },
             ],
-            filterClass: FullScreenWidthEnum.medium,
+            filterClass: ScreenWidthEnum.medium,
             isMobile,
           };
         }
@@ -95,7 +93,7 @@ export class MainDashboardComponent implements OnInit {
 
 interface MainDashboardViewState {
   cards: Card[];
-  filterClass: FullScreenWidthEnum;
+  filterClass: ScreenWidthEnum;
   isMobile: boolean;
 }
 

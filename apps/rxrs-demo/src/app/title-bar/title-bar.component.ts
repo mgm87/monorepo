@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AppStateService } from '../services/app-state.service';
-import {
-  WindowSizeService,
-  FullScreenWidthEnum,
-} from '../services/window-size.service';
 import { Observable } from 'rxjs';
+
+import { ScreenSizeService, ScreenWidthEnum } from 'rxrs-ng';
+
+import { AppStateService } from '../services/app-state.service';
 
 @Component({
   selector: 'app-title-bar',
@@ -13,13 +12,13 @@ import { Observable } from 'rxjs';
 })
 export class TitleBarComponent implements OnInit {
   sideNavOpen = false;
-  currentSize$: Observable<FullScreenWidthEnum>;
+  currentSize$: Observable<ScreenWidthEnum>;
 
   constructor(
     private state: AppStateService,
-    private windowSizeService: WindowSizeService
+    private screenSizeService: ScreenSizeService
   ) {
-    this.currentSize$ = this.windowSizeService.currentSize$;
+    this.currentSize$ = this.screenSizeService.size$;
   }
 
   ngOnInit() {
