@@ -10,11 +10,11 @@ The idea behind responsive reactive design is that we should stop writing media 
 ### installation
 
 ```bash
-npm install rxrs-ng
+npm install rxrs rxrs-ng
 
 # or
 
-yarn add rxrs-ng
+yarn add rxrs rxrs-ng
 ```
 
 ### Usage

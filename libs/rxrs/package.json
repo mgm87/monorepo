@@ -1,6 +1,18 @@
 {
   "name": "rxrs",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "A library enabling the easy use of reactive responsive design in any project!",
+  "keywords": [
+    "rxjs",
+    "reactive",
+    "responsive"
+  ],
+  "author": "Michael Madsen",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgm87/monorepo/libs/rxrs"
+  },
+  "license": "MIT",
   "peerDependencies": {
     "rxjs": "^5.0.0 || ^6.0.0"
   }

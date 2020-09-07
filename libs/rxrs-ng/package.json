@@ -1,10 +1,25 @@
 {
   "name": "rxrs-ng",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "A library enabling the easy use of reactive responsive design in any Angular project!",
+  "keywords": [
+    "rxjs",
+    "reactive",
+    "responsive",
+    "angular",
+    "ng"
+  ],
+  "author": "Michael Madsen",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgm87/monorepo/libs/rxrs-ng"
+  },
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^10.0.0 || ^11.0.0-rc.0 || ^11.0.0",
     "@angular/core": "^10.0.0 || ^11.0.0-rc.0 || ^11.0.0",
-    "rxjs": "^5.0.0 || ^6.0.0"
+    "rxjs": "^5.0.0 || ^6.0.0",
+    "rxrs": "^1.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"
